@@ -1,0 +1,363 @@
+\documentclass[a5paper, 11pt, twoside]{book}
+
+% ─── Pakete ───────────────────────────────────────────────────────────────────
+\usepackage[a5paper, top=2cm, bottom=2.5cm, inner=2.2cm, outer=1.8cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{tcolorbox}
+\usepackage{fontawesome5}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{parskip}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{mdframed}
+\usepackage{ifthen}
+\usepackage{multicol}
+\usepackage[hidelinks]{hyperref}
+
+\tcbuselibrary{skins, breakable, most}
+
+% ─── Farben ───────────────────────────────────────────────────────────────────
+\definecolor{primary}{HTML}{3A6351}      % Dunkelgrün
+\definecolor{accent}{HTML}{F5A623}       % Warmgelb/Orange
+\definecolor{lightbg}{HTML}{F4F1EC}      % Cremeweiß
+\definecolor{infobg}{HTML}{E8F4F0}       % Hellgrün
+\definecolor{warnbg}{HTML}{FFF8E7}       % Hellorche
+\definecolor{trainercolor}{HTML}{2C4A6E} % Dunkelblau
+\definecolor{trainerbg}{HTML}{E8EEF5}    % Hellblau
+
+% ─── Altersgruppen-Farben ─────────────────────────────────────────────────────
+\definecolor{welpencolor}{HTML}{7DC98A}
+\definecolor{pubcolor}{HTML}{F0A500}
+\definecolor{erwachsencolor}{HTML}{5B8DB8}
+
+% ─── Schriften / Überschriften ────────────────────────────────────────────────
+\titleformat{\chapter}[display]
+  {\normalfont\huge\bfseries\color{primary}}
+  {\chaptertitlename\ \thechapter}{12pt}{\Huge}
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{primary}}
+  {\thesection}{1em}{}
+
+% ─── Kopf-/Fußzeilen ──────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\small\color{primary}\leftmark}
+\fancyhead[RO]{\small\color{primary}\rightmark}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% ─── Hilfsbefehle ─────────────────────────────────────────────────────────────
+
+% Schwierigkeitslevel: \schwierigkeit{1–5}
+\newcommand{\schwierigkeit}[1]{%
+  \foreach \i in {1,...,5}{%
+    \ifthenelse{\i > #1}%
+      {\textcolor{gray!40}{\faCircle}}%
+      {\textcolor{accent}{\faCircle}}%
+  }%
+}
+
+% Altersgruppen-Badge
+\newcommand{\altersbadge}[1]{%
+  \ifthenelse{\equal{#1}{welpen}}{%
+    \tcbox[colback=welpencolor!20, colframe=welpencolor, fontupper=\bfseries\small, boxrule=1pt, arc=4pt, boxsep=2pt, left=4pt, right=4pt, top=1pt, bottom=1pt]{\textcolor{welpencolor!70!black}{\faPaw~Welpen / Junghunde}}%
+  }{}%
+  \ifthenelse{\equal{#1}{pubertaet}}{%
+    \tcbox[colback=pubcolor!20, colframe=pubcolor, fontupper=\bfseries\small, boxrule=1pt, arc=4pt, boxsep=2pt, left=4pt, right=4pt, top=1pt, bottom=1pt]{\textcolor{pubcolor!70!black}{\faPaw~Pubertät}}%
+  }{}%
+  \ifthenelse{\equal{#1}{erwachsen}}{%
+    \tcbox[colback=erwachsencolor!20, colframe=erwachsencolor, fontupper=\bfseries\small, boxrule=1pt, arc=4pt, boxsep=2pt, left=4pt, right=4pt, top=1pt, bottom=1pt]{\textcolor{erwachsencolor!70!black}{\faPaw~Erwachsene Hunde}}%
+  }{}%
+}
+
+% ─── Übungs-Umgebung (Doppelseite) ────────────────────────────────────────────
+% Verwendung:
+%   \begin{uebung}{Titel}{altersgruppe}{kategorie}{schwierigkeit_1_bis_5}
+%     \uebungsbild{pfad/zum/bild.jpg}
+%     \uebungsbeschreibung{Text...}
+%     \uebungsvariationen{Text...}
+%     \uebungstrainer{Text...}
+%   \end{uebung}
+
+\newcommand{\uebungsbild}[1]{\def\@uebungsbild{#1}}
+\newcommand{\uebungsbeschreibung}[1]{\def\@uebungsbeschreibung{#1}}
+\newcommand{\uebungsvariationen}[1]{\def\@uebungsvariationen{#1}}
+\newcommand{\uebungstrainer}[1]{\def\@uebungstrainer{#1}}
+
+\newenvironment{uebung}[4]{%
+  % #1 = Titel, #2 = altersgruppe, #3 = Kategorie, #4 = Schwierigkeit
+  \def\@uebungtitel{#1}%
+  \def\@altersgruppe{#2}%
+  \def\@kategorie{#3}%
+  \def\@schwierigkeit{#4}%
+  \def\@uebungsbild{}%
+  \def\@uebungsbeschreibung{}%
+  \def\@uebungsvariationen{}%
+  \def\@uebungstrainer{}%
+}{%
+  \clearpage
+  % ── Linke Seite (gerade Seitenzahl) ──────────────────────────────────────
+  \ifodd\value{page}\hbox{}\clearpage\fi  % sicherstellen wir starten auf gerader Seite
+  % Seite 1: Titel + Metadaten + Bild + Beschreibung
+  \noindent
+  % Header-Balken
+  \begin{tcolorbox}[
+    colback=primary,
+    colframe=primary,
+    arc=0pt,
+    boxrule=0pt,
+    left=6pt, right=6pt, top=6pt, bottom=6pt,
+    width=\textwidth,
+    sharp corners
+  ]
+    {\color{white}\huge\bfseries\@uebungtitel}
+  \end{tcolorbox}
+
+  \vspace{4pt}
+  % Badges: Altersgruppe | Kategorie | Schwierigkeit
+  \noindent
+  \altersbadge{\@altersgruppe}\quad
+  \tcbox[colback=lightbg, colframe=primary!40, fontupper=\small, boxrule=0.8pt, arc=4pt,
+         boxsep=2pt, left=4pt, right=4pt, top=1pt, bottom=1pt]{%
+    \faTag~\@kategorie}%
+  \hfill
+  \tcbox[colback=lightbg, colframe=primary!40, fontupper=\small, boxrule=0.8pt, arc=4pt,
+         boxsep=2pt, left=4pt, right=4pt, top=1pt, bottom=1pt]{%
+    Schwierigkeit: \schwierigkeit{\@schwierigkeit}}
+
+  \vspace{10pt}
+
+  % Bild
+  \ifthenelse{\equal{\@uebungsbild}{}}{%
+    % Platzhalterbild
+    \begin{tcolorbox}[colback=gray!10, colframe=gray!30, arc=4pt, boxrule=0.8pt, height=5.5cm, valign=center, halign=center]
+      \textcolor{gray}{\faImage[regular]~\large Bild einfügen}
+    \end{tcolorbox}%
+  }{%
+    \begin{center}
+      \includegraphics[width=\textwidth, height=5.5cm, keepaspectratio]{\@uebungsbild}
+    \end{center}%
+  }
+
+  \vspace{10pt}
+
+  % Beschreibung
+  \begin{tcolorbox}[
+    title={\faBook~Beschreibung},
+    colback=infobg,
+    colframe=primary,
+    fonttitle=\bfseries\color{white},
+    coltitle=white,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={colback=primary, arc=3pt},
+    arc=4pt, boxrule=0.8pt,
+    breakable
+  ]
+    \@uebungsbeschreibung
+  \end{tcolorbox}
+
+  \clearpage
+
+  % ── Rechte Seite (ungerade Seitenzahl) ───────────────────────────────────
+  % Variationen
+  \begin{tcolorbox}[
+    title={\faSlidersH~Variationen},
+    colback=warnbg,
+    colframe=accent,
+    fonttitle=\bfseries\color{white},
+    coltitle=white,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={colback=accent, arc=3pt},
+    arc=4pt, boxrule=0.8pt,
+    breakable
+  ]
+    \@uebungsvariationen
+  \end{tcolorbox}
+
+  \vspace{14pt}
+
+  % Trainer-Hinweise
+  \begin{tcolorbox}[
+    title={\faUserTie~Hinweise für Trainer},
+    colback=trainerbg,
+    colframe=trainercolor,
+    fonttitle=\bfseries\color{white},
+    coltitle=white,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={colback=trainercolor, arc=3pt},
+    arc=4pt, boxrule=0.8pt,
+    breakable
+  ]
+    \@uebungstrainer
+  \end{tcolorbox}
+
+  \clearpage
+}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\begin{document}
+
+% ─── Cover ────────────────────────────────────────────────────────────────────
+\begin{titlepage}
+  \pagecolor{primary}
+  \begin{tikzpicture}[remember picture, overlay]
+    \fill[accent] (current page.south west) rectangle +(\paperwidth, 3.5cm);
+    \fill[white!10!primary] (current page.north west) ++(0,-0.5\paperheight)
+      rectangle ++(\paperwidth, 0.4pt);
+  \end{tikzpicture}
+
+  \vspace*{2.5cm}
+  \begin{center}
+    {\color{white}\fontsize{36}{42}\selectfont\bfseries Übungsbuch}\\[0.5em]
+    {\color{accent}\fontsize{28}{34}\selectfont\bfseries Hundeschule}\\[2em]
+    {\color{white!80!primary}\large Welpen · Pubertät · Erwachsene Hunde}
+  \end{center}
+
+  \vfill
+
+  % Platz für Logo oder Foto
+  \begin{center}
+    \begin{tcolorbox}[colback=white!10!primary, colframe=white!30!primary,
+                      width=5cm, height=5cm, arc=8pt, halign=center, valign=center]
+      \textcolor{white!60!primary}{\fontsize{48}{48}\selectfont\faPaw}
+    \end{tcolorbox}
+  \end{center}
+
+  \vfill
+
+  \begin{center}
+    {\color{primary!20!black}\large Hundeschule \textit{Name eintragen}}\\[0.3em]
+    {\color{primary!30!black}\normalsize \the\year}
+  \end{center}
+  \vspace{1.5cm}
+\end{titlepage}
+\nopagecolor
+
+% ─── Inhaltsverzeichnis ───────────────────────────────────────────────────────
+\frontmatter
+\tableofcontents
+
+% ─── Hauptteil ────────────────────────────────────────────────────────────────
+\mainmatter
+
+% ══════════════════════════════════════════════════════════════════════════════
+\chapter{Welpen \& Junghunde}
+\label{chap:welpen}
+
+\section{Grundübungen}
+
+% ── Beispiel-Übung 1 ──────────────────────────────────────────────────────────
+\begin{uebung}{Sitz}{welpen}{Grundkommando}{2}
+  \uebungsbeschreibung{%
+    Halte einen Leckerli-Happen knapp über die Nase des Hundes und führe ihn langsam nach hinten über den Kopf. Der Hund wird automatisch in die Sitz-Position gehen, um dem Leckerli zu folgen.\\[6pt]
+    \textbf{Schritte:}
+    \begin{enumerate}[leftmargin=*, itemsep=2pt]
+      \item Leckerli in geschlossener Faust über Hundenase halten.
+      \item Faust langsam nach hinten-oben führen.
+      \item Sobald Hund sitzt: markieren (Clicker / „Ja!") und belohnen.
+      \item Kommando erst einführen, wenn Verhalten zuverlässig gezeigt wird.
+    \end{enumerate}
+  }
+  \uebungsvariationen{%
+    \begin{itemize}[leftmargin=*, itemsep=4pt]
+      \item \textbf{Mit Distanz:} Sitz aus zunehmend größerer Entfernung üben.
+      \item \textbf{Mit Ablenkung:} Übung in belebter Umgebung wiederholen.
+      \item \textbf{Dauer steigern:} Hund lernt, in der Sitz-Position zu verweilen, bis er freigegeben wird.
+    \end{itemize}
+  }
+  \uebungstrainer{%
+    \begin{itemize}[leftmargin=*, itemsep=4pt]
+      \item Darauf achten, dass der Hund nicht springt – Faust nicht zu hoch halten.
+      \item Timing des Markers ist entscheidend: exakt im Moment des Hinsetzens.
+      \item Bei Welpen kurze Trainingseinheiten (max. 3–5 Minuten).
+    \end{itemize}
+  }
+\end{uebung}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\chapter{Pubertät}
+\label{chap:pubertaet}
+
+\section{Auffrischung \& Impulskontrolle}
+
+% ── Beispiel-Übung 2 ──────────────────────────────────────────────────────────
+\begin{uebung}{Abruf im Freien}{pubertaet}{Abruf}{3}
+  \uebungsbeschreibung{%
+    Der Hund wird auf einer langen Leine abgesetzt und darf schnüffeln. Nach einer kurzen Pause wird er mit dem Rufnamen und Abrufkommando zurückgerufen.\\[6pt]
+    \textbf{Schritte:}
+    \begin{enumerate}[leftmargin=*, itemsep=2pt]
+      \item Hund absetzen und etwas Distanz aufbauen (3–5\,m).
+      \item Einmal deutlich rufen: „\textit{[Name]} – Hier!".
+      \item Kommando nicht wiederholen – ggf. mit Leine leicht unterstützen.
+      \item Großes Fest bei jedem Kommen!
+    \end{enumerate}
+  }
+  \uebungsvariationen{%
+    \begin{itemize}[leftmargin=*, itemsep=4pt]
+      \item \textbf{Rückwärtslaufen:} Trainer läuft bei Abruf rückwärts weg – motiviert den Hund mehr.
+      \item \textbf{Versteckspiel:} Trainer versteckt sich hinter einem Baum bevor er ruft.
+      \item \textbf{Ohne Leine} (nur in gesichertem Bereich und mit zuverlässigem Abruf).
+    \end{itemize}
+  }
+  \uebungstrainer{%
+    \begin{itemize}[leftmargin=*, itemsep=4pt]
+      \item Niemals beim Kommen schimpfen – auch wenn es lange dauerte.
+      \item Nie nur am Ende der Runde abrufen (Hund lernt: Abruf = Spaß ist vorbei).
+      \item Bei Pubertätshunden erhöhte Ablenkung einkalkulieren – Erwartungen anpassen.
+    \end{itemize}
+  }
+\end{uebung}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\chapter{Erwachsene Hunde}
+\label{chap:erwachsen}
+
+\section{Verfeinerung \& Alltagsübungen}
+
+% ── Beispiel-Übung 3 ──────────────────────────────────────────────────────────
+\begin{uebung}{Geduld an der Tür}{erwachsen}{Geduld}{4}
+  \uebungsbeschreibung{%
+    Der Hund lernt, ruhig zu warten, während die Haustür geöffnet wird. Er darf erst nach einer Freigabe nach draußen.\\[6pt]
+    \textbf{Schritte:}
+    \begin{enumerate}[leftmargin=*, itemsep=2pt]
+      \item Hund vor der Tür in Sitz oder Platz.
+      \item Tür leicht öffnen – bei Bewegung sofort schließen.
+      \item Erst wenn Hund ruhig bleibt: Tür vollständig öffnen.
+      \item Freigabe geben (z.\,B. „Okay!") bevor Hund nach draußen darf.
+    \end{enumerate}
+  }
+  \uebungsvariationen{%
+    \begin{itemize}[leftmargin=*, itemsep=4pt]
+      \item \textbf{Klingel üben:} Übung auch bei klingelnder Türglocke üben.
+      \item \textbf{Besuch:} Warten, bis Besucher ins Haus gekommen ist und Hund begrüßt hat.
+      \item \textbf{Auto:} Gleiche Übung beim Aussteigen aus dem Auto.
+    \end{itemize}
+  }
+  \uebungstrainer{%
+    \begin{itemize}[leftmargin=*, itemsep=4pt]
+      \item Konsequenz ist wichtiger als Schnelligkeit – lieber klein anfangen.
+      \item Auf Körperspannung des Hundes achten: angespanntes Sitzen ist kein echtes Warten.
+      \item Freigabekommando immer klar und einheitlich verwenden.
+    \end{itemize}
+  }
+\end{uebung}
+
+% ─── Anhang (optional) ────────────────────────────────────────────────────────
+\backmatter
+\chapter*{Notizen}
+\addcontentsline{toc}{chapter}{Notizen}
+\vspace{2cm}
+\foreach \i in {1,...,20}{%
+  \noindent\rule{\textwidth}{0.4pt}\\[1.1em]
+}
+
+\end{document}

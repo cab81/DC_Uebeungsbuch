@@ -1,0 +1,26 @@
+# LaTeX Hilfsdateien
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bbl
+*.blg
+*.idx
+*.ilg
+*.ind
+*.bcf
+*.run.xml
+*.nav
+*.snm
+*.vrb
+
+# Ausgabe
+*.pdf
+
+# Editor-Metadaten
+.DS_Store
