@@ -25,19 +25,21 @@
 
 \tcbuselibrary{skins, breakable, most}
 
-% ─── Farben ───────────────────────────────────────────────────────────────────
-\definecolor{primary}{HTML}{3A6351}      % Dunkelgrün
-\definecolor{accent}{HTML}{F5A623}       % Warmgelb/Orange
-\definecolor{lightbg}{HTML}{F4F1EC}      % Cremeweiß
-\definecolor{infobg}{HTML}{E8F4F0}       % Hellgrün
-\definecolor{warnbg}{HTML}{FFF8E7}       % Hellorche
-\definecolor{trainercolor}{HTML}{2C4A6E} % Dunkelblau
-\definecolor{trainerbg}{HTML}{E8EEF5}    % Hellblau
+% ─── Farben (Dog College Franken CI) ──────────────────────────────────────────
+\definecolor{primary}{HTML}{2E6B2E}      % DCF-Dunkelgrün (Logo-Balken)
+\definecolor{primarylight}{HTML}{4A8C3F} % DCF-Hellgrün (Logo-Highlights)
+\definecolor{accent}{HTML}{FFFFFF}       % Weiß (wie "FRANKEN"-Schrift im Logo)
+\definecolor{accentdark}{HTML}{1A1A1A}   % Fast-Schwarz (wie "DOG COLLEGE"-Schrift)
+\definecolor{lightbg}{HTML}{F2F7F2}      % Sehr helles Grün-Weiß (Seitenhintergrund)
+\definecolor{infobg}{HTML}{E4F0E4}       % Hellgrün (Beschreibungsbox)
+\definecolor{warnbg}{HTML}{EEF5E4}       % Helles Gelbgrün (Variationen)
+\definecolor{trainercolor}{HTML}{1E4D1E} % Sehr dunkles Grün (Trainer-Box)
+\definecolor{trainerbg}{HTML}{D6E8D6}    % Zartes Grün (Trainer-Hintergrund)
 
 % ─── Altersgruppen-Farben ─────────────────────────────────────────────────────
-\definecolor{welpencolor}{HTML}{7DC98A}
-\definecolor{pubcolor}{HTML}{F0A500}
-\definecolor{erwachsencolor}{HTML}{5B8DB8}
+\definecolor{welpencolor}{HTML}{6DB56D}  % Mittleres Grün (Welpen)
+\definecolor{pubcolor}{HTML}{3D8C3D}     % Kräftiges Grün (Pubertät)
+\definecolor{erwachsencolor}{HTML}{1E5C1E} % Dunkles Grün (Erwachsen)
 
 % ─── Schriften / Überschriften ────────────────────────────────────────────────
 \titleformat{\chapter}[display]
@@ -211,16 +213,16 @@
 \begin{titlepage}
   \pagecolor{primary}
   \begin{tikzpicture}[remember picture, overlay]
-    \fill[accent] (current page.south west) rectangle +(\paperwidth, 3.5cm);
-    \fill[white!10!primary] (current page.north west) ++(0,-0.5\paperheight)
-      rectangle ++(\paperwidth, 0.4pt);
+    \fill[primarylight] (current page.south west) rectangle +(\paperwidth, 3.5cm);
+    \fill[white!15!primary] (current page.north west) ++(0,-0.5\paperheight)
+      rectangle ++(\paperwidth, 0.6pt);
   \end{tikzpicture}
 
   \vspace*{2.5cm}
   \begin{center}
     {\color{white}\fontsize{36}{42}\selectfont\bfseries Übungsbuch}\\[0.5em]
-    {\color{accent}\fontsize{28}{34}\selectfont\bfseries Dog College Franken}\\[2em]
-    {\color{white!80!primary}\large Welpen · Pubertät · Erwachsene Hunde}
+    {\color{white}\fontsize{28}{34}\selectfont\bfseries Dog College Franken}\\[2em]
+    {\color{white!70!primary}\large Welpen · Pubertät · Erwachsene Hunde}
   \end{center}
 
   \vfill
@@ -233,8 +235,8 @@
   \vfill
 
   \begin{center}
-    {\color{primary!20!black}\large Hundeschule \textit{Name eintragen}}\\[0.3em]
-    {\color{primary!30!black}\normalsize \the\year}
+    {\color{white}\large \textit{www.dogcollege.de}}\\[0.3em]
+    {\color{white!70!primary}\normalsize \the\year}
   \end{center}
   \vspace{1.5cm}
 \end{titlepage}
