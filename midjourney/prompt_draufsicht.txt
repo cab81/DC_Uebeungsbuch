@@ -3,32 +3,35 @@
 ║                      Dog College Franken Übungsbuch                         ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
 
-── ANPASSEN ──────────────────────────────────────────────────────────────────
+SCHRITT 1 — Platzhalter ausfüllen
+──────────────────────────────────────────────────────────────────────────────
 
 [ANZAHL PERSONEN & HUNDE]
-→ Beschreibe wie viele Personen und Hunde im Bild sind
-   Beispiele:
-   - one human, one dog
-   - two humans standing apart, one dog in the middle
-   - one human, three dogs arranged in a semicircle
+Beschreibe wie viele Personen und Hunde im Bild sind
+Beispiele:
+  - one human, one dog
+  - two humans standing apart, one dog in the middle
+  - one human, three dogs arranged in a semicircle
 
 [ÜBUNGSABLAUF & POSITIONEN]
-→ Beschreibe Start- und Endpositionen von Mensch und Hund
-   Beispiele:
-   - human figure standing on the left, dog figure sitting directly in front
-   - human on the right side, dog starting position on the far left,
-     end position sitting in front of human
-   - two humans facing each other 5 meters apart, dog in the center
+Beschreibe Start- und Endpositionen von Mensch und Hund
+Beispiele:
+  - human figure standing on the left, dog figure sitting directly in front
+  - human on the right side, dog starting position on the far left,
+    end position sitting in front of human
+  - two humans facing each other 5 meters apart, dog in the center
 
 [PFEILE & BEWEGUNGSLINIEN]
-→ Beschreibe Richtung, Form und Anzahl der Bewegungspfeile
-   Beispiele:
-   - single straight orange arrow from left to right showing dog moving toward human
-   - curved orange arrow showing dog running in a wide arc around the human
-   - two arrows: one showing dog moving away, one showing dog returning
-   - small circular arrow near dog position indicating a turn or sit movement
+Beschreibe Richtung, Form und Anzahl der Bewegungspfeile
+Beispiele:
+  - single straight orange arrow from left to right showing dog moving toward human
+  - curved orange arrow showing dog running in a wide arc around the human
+  - two arrows: one showing dog moving away, one showing dog returning
+  - small circular arrow near dog position indicating a turn or sit movement
 
-── NICHT VERÄNDERN ───────────────────────────────────────────────────────────
+
+SCHRITT 2 — Diesen Block in Midjourney kopieren (nur dieser Block!)
+══════════════════════════════════════════════════════════════════════════════
 
 Top-down training diagram,
 [ANZAHL PERSONEN & HUNDE],
@@ -49,7 +52,11 @@ clean infographic style, no gradients, no shadows, flat design,
 no text, no photorealism, no clutter
 --ar 3:2 --style raw --no gradients --v 6.1 --seed 1182697702
 
-── FERTIG AUSGEFÜLLTES BEISPIEL ──────────────────────────────────────────────
+══════════════════════════════════════════════════════════════════════════════
+
+
+BEISPIEL — fertiger Prompt für "Abruf"
+──────────────────────────────────────────────────────────────────────────────
 
 Top-down training diagram,
 one human, one dog,
@@ -72,12 +79,13 @@ clean infographic style, no gradients, no shadows, flat design,
 no text, no photorealism, no clutter
 --ar 3:2 --style raw --no gradients --v 6.1 --seed 1182697702
 
-── KURZREFERENZ ÜBUNGSSZENARIEN ──────────────────────────────────────────────
 
+KURZREFERENZ ÜBUNGSSZENARIEN
+──────────────────────────────────────────────────────────────────────────────
 Sitz/Platz    → human stationary, dog moves to position in front, stops
 Abruf         → human on one end, dog starts far away, straight arrow toward human
 Leinenführig  → human and dog move together, parallel arrow along a path
 Slalom        → dog weaves between human leg markers, curved zigzag arrow
-Bleib + Abstand → human steps away from sitting dog, dashed arrow showing distance
+Bleib+Abstand → human steps away from sitting dog, dashed arrow showing distance
 Begegnung     → two humans with dogs approaching each other, arrows converging
 Freifolge     → human and dog move together in a curve or circle

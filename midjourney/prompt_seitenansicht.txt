@@ -3,38 +3,41 @@
 ║                      Dog College Franken Übungsbuch                         ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
 
-── ANPASSEN ──────────────────────────────────────────────────────────────────
+SCHRITT 1 — Platzhalter ausfüllen
+──────────────────────────────────────────────────────────────────────────────
 
 [HANDZEICHEN]
-→ Beschreibe das verwendete Handzeichen der Trainerin
-   Beispiele:
-   - right arm raised, index finger pointing straight up as hand signal
-   - open right hand, palm facing toward the dog as stop signal
-   - right arm extended downward, index finger pointing to the ground
+Beschreibe das verwendete Handzeichen der Trainerin
+Beispiele:
+  - right arm raised, index finger pointing straight up as hand signal
+  - open right hand, palm facing toward the dog as stop signal
+  - right arm extended downward, index finger pointing to the ground
 
 [HUNDEPOSITION & VERHALTEN]
-→ Beschreibe Position und Verhalten des Hundes
-   Beispiele:
-   - dog sitting attentively in front of the trainer looking up at the hand signal
-   - dog lying flat on the ground, head resting on paws, eyes looking up
-   - dog standing still beside the trainer, looking forward
+Beschreibe Position und Verhalten des Hundes
+Beispiele:
+  - dog sitting attentively in front of the trainer looking up at the hand signal
+  - dog lying flat on the ground, head resting on paws, eyes looking up
+  - dog standing still beside the trainer, looking forward
 
 [HUND — RASSE & ALTER]
-→ Beschreibe Rasse und Alter des Hundes
-   Beispiele:
-   - small puppy, fluffy round face, floppy ears
-   - medium to large adult dog, fluffy dense double coat
-   - large senior dog, broad chest, calm posture
+Beschreibe Rasse und Alter des Hundes
+Beispiele:
+  - small puppy, fluffy round face, floppy ears
+  - medium to large adult dog, fluffy dense double coat
+  - large senior dog, broad chest, calm posture
 
 [HUND — FARBE & FELL]
-→ Beschreibe Fellfarbe und -struktur
-   Beispiele:
-   - tiger brindle coat pattern, dark brown and black striped fur with tan markings
-   - golden yellow fur, short smooth coat
-   - black and white patches, medium length wavy coat
-   - solid grey, short dense fur
+Beschreibe Fellfarbe und -struktur
+Beispiele:
+  - tiger brindle coat pattern, dark brown and black striped fur with tan markings
+  - golden yellow fur, short smooth coat
+  - black and white patches, medium length wavy coat
+  - solid grey, short dense fur
 
-── NICHT VERÄNDERN ───────────────────────────────────────────────────────────
+
+SCHRITT 2 — Diesen Block in Midjourney kopieren (nur dieser Block!)
+══════════════════════════════════════════════════════════════════════════════
 
 A female dog trainer standing upright seen from the side,
 [HANDZEICHEN],
@@ -57,7 +60,11 @@ tan, off-white and warm grey,
 no speech bubbles, no text, no watermark
 --ar 3:2 --style raw --v 6.1 --seed 1182697702
 
-── FERTIG AUSGEFÜLLTES BEISPIEL ──────────────────────────────────────────────
+══════════════════════════════════════════════════════════════════════════════
+
+
+BEISPIEL — fertiger Prompt für "Sitz"
+──────────────────────────────────────────────────────────────────────────────
 
 A female dog trainer standing upright seen from the side,
 right arm raised, index finger pointing straight up as hand signal,
@@ -81,8 +88,9 @@ tan, off-white and warm grey,
 no speech bubbles, no text, no watermark
 --ar 3:2 --style raw --v 6.1 --seed 1182697702
 
-── KURZREFERENZ HANDZEICHEN ──────────────────────────────────────────────────
 
+KURZREFERENZ HANDZEICHEN
+──────────────────────────────────────────────────────────────────────────────
 Sitz       → right arm raised, index finger pointing straight up
 Platz      → right arm extended downward, index finger pointing to the ground
 Bleib      → open right hand, palm facing toward the dog as stop signal
