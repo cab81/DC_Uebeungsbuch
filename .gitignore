@@ -22,6 +22,12 @@
 # Ausgabe
 *.pdf
 
+# Ausgabe-Ordner (TeXiFy / IntelliJ)
+out/
+
+# IntelliJ IDEA Projektdateien
+.idea/
+
 # Editor-Metadaten
 .DS_Store
 **/__pycache__
