@@ -88,25 +88,26 @@
 %     \uebungstrainer{Text...}
 %   \end{uebung}
 
-\newcommand{\uebungsbild}[1]{\def\@uebungsbild{#1}}
-\newcommand{\uebungsbeschreibung}[1]{\def\@uebungsbeschreibung{#1}}
-\newcommand{\uebungsvariationen}[1]{\def\@uebungsvariationen{#1}}
-\newcommand{\uebungstrainer}[1]{\def\@uebungstrainer{#1}}
+% Interne Speichervariablen (ohne @ um Konflikte zu vermeiden)
+\newcommand{\uebungsbild}[1]{\def\UebBild{#1}}
+\newcommand{\uebungsbeschreibung}[1]{\def\UebBeschreibung{#1}}
+\newcommand{\uebungsvariationen}[1]{\def\UebVariationen{#1}}
+\newcommand{\uebungstrainer}[1]{\def\UebTrainer{#1}}
 
 \newenvironment{uebung}[4]{%
   % #1 = Titel, #2 = altersgruppe, #3 = Kategorie, #4 = Schwierigkeit
-  \def\@uebungtitel{#1}%
-  \def\@altersgruppe{#2}%
-  \def\@kategorie{#3}%
-  \def\@schwierigkeit{#4}%
-  \def\@uebungsbild{}%
-  \def\@uebungsbeschreibung{}%
-  \def\@uebungsvariationen{}%
-  \def\@uebungstrainer{}%
+  \def\UebTitel{#1}%
+  \def\UebAlter{#2}%
+  \def\UebKategorie{#3}%
+  \def\UebSchwierigkeit{#4}%
+  \def\UebBild{}%
+  \def\UebBeschreibung{}%
+  \def\UebVariationen{}%
+  \def\UebTrainer{}%
 }{%
   \clearpage
   % ── Linke Seite (gerade Seitenzahl) ──────────────────────────────────────
-  \ifodd\value{page}\hbox{}\clearpage\fi  % sicherstellen wir starten auf gerader Seite
+  \ifodd\value{page}\hbox{}\clearpage\fi
   % Seite 1: Titel + Metadaten + Bild + Beschreibung
   \noindent
   % Header-Balken
@@ -119,32 +120,32 @@
     width=\textwidth,
     sharp corners
   ]
-    {\color{white}\huge\bfseries\@uebungtitel}
+    {\color{white}\huge\bfseries\UebTitel}
   \end{tcolorbox}
 
   \vspace{4pt}
   % Badges: Altersgruppe | Kategorie | Schwierigkeit
   \noindent
-  \altersbadge{\@altersgruppe}\quad
+  \altersbadge{\UebAlter}\quad
   \tcbox[colback=lightbg, colframe=primary!40, fontupper=\small, boxrule=0.8pt, arc=4pt,
          boxsep=2pt, left=4pt, right=4pt, top=1pt, bottom=1pt]{%
-    \faTag~\@kategorie}%
+    \faTag~\UebKategorie}%
   \hfill
   \tcbox[colback=lightbg, colframe=primary!40, fontupper=\small, boxrule=0.8pt, arc=4pt,
          boxsep=2pt, left=4pt, right=4pt, top=1pt, bottom=1pt]{%
-    Schwierigkeit: \schwierigkeit{\@schwierigkeit}}
+    Schwierigkeit: \schwierigkeit{\UebSchwierigkeit}}
 
   \vspace{10pt}
 
   % Bild
-  \ifthenelse{\equal{\@uebungsbild}{}}{%
+  \ifthenelse{\equal{\UebBild}{}}{%
     % Platzhalterbild
     \begin{tcolorbox}[colback=gray!10, colframe=gray!30, arc=4pt, boxrule=0.8pt, height=5.5cm, valign=center, halign=center]
       \textcolor{gray}{\faImage[regular]~\large Bild einfügen}
     \end{tcolorbox}%
   }{%
     \begin{center}
-      \includegraphics[width=\textwidth, height=5.5cm, keepaspectratio]{\@uebungsbild}
+      \includegraphics[width=\textwidth, height=5.5cm, keepaspectratio]{\UebBild}
     \end{center}%
   }
 
@@ -162,7 +163,7 @@
     arc=4pt, boxrule=0.8pt,
     breakable
   ]
-    \@uebungsbeschreibung
+    \UebBeschreibung
   \end{tcolorbox}
 
   \clearpage
@@ -180,7 +181,7 @@
     arc=4pt, boxrule=0.8pt,
     breakable
   ]
-    \@uebungsvariationen
+    \UebVariationen
   \end{tcolorbox}
 
   \vspace{14pt}
@@ -197,7 +198,7 @@
     arc=4pt, boxrule=0.8pt,
     breakable
   ]
-    \@uebungstrainer
+    \UebTrainer
   \end{tcolorbox}
 
   \clearpage
