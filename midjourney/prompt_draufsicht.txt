@@ -1,0 +1,83 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║          MIDJOURNEY PROMPT TEMPLATE — DRAUFSICHT (Diagramm-Stil)           ║
+║                      Dog College Franken Übungsbuch                         ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+── ANPASSEN ──────────────────────────────────────────────────────────────────
+
+[ANZAHL PERSONEN & HUNDE]
+→ Beschreibe wie viele Personen und Hunde im Bild sind
+   Beispiele:
+   - one human, one dog
+   - two humans standing apart, one dog in the middle
+   - one human, three dogs arranged in a semicircle
+
+[ÜBUNGSABLAUF & POSITIONEN]
+→ Beschreibe Start- und Endpositionen von Mensch und Hund
+   Beispiele:
+   - human figure standing on the left, dog figure sitting directly in front
+   - human on the right side, dog starting position on the far left,
+     end position sitting in front of human
+   - two humans facing each other 5 meters apart, dog in the center
+
+[PFEILE & BEWEGUNGSLINIEN]
+→ Beschreibe Richtung, Form und Anzahl der Bewegungspfeile
+   Beispiele:
+   - single straight orange arrow from left to right showing dog moving toward human
+   - curved orange arrow showing dog running in a wide arc around the human
+   - two arrows: one showing dog moving away, one showing dog returning
+   - small circular arrow near dog position indicating a turn or sit movement
+
+── NICHT VERÄNDERN ───────────────────────────────────────────────────────────
+
+Top-down training diagram,
+[ANZAHL PERSONEN & HUNDE],
+[ÜBUNGSABLAUF & POSITIONEN],
+[PFEILE & BEWEGUNGSLINIEN],
+minimalist flat vector illustration, strict color palette only:
+dark forest green (#1E4D1E) for human silhouettes,
+medium green (#4A8C3F) for dog shapes,
+warm orange-gold (#F5A623) for movement arrows and direction lines,
+solid plain off-white background (#F2F7F2) uniformly filled,
+thin clean border frame around the entire image,
+border color dark forest green (#2E6B2E), border width 8px,
+no gradients in background, no vignette, no drop shadow,
+light warm grey (#C8C4B8) for position zones and ground markings,
+simple geometric human figures, tiny stylized dog shapes,
+bold clear arrows showing movement flow,
+clean infographic style, no gradients, no shadows, flat design,
+no text, no photorealism, no clutter
+--ar 3:2 --style raw --no gradients --v 6.1 --seed 1182697702
+
+── FERTIG AUSGEFÜLLTES BEISPIEL ──────────────────────────────────────────────
+
+Top-down training diagram,
+one human, one dog,
+human figure standing on the left side, dog starting position on the far right,
+dog end position sitting directly in front of the human,
+single straight orange arrow from right to left showing dog moving toward human,
+small curved arrow near dog end position indicating sit movement,
+minimalist flat vector illustration, strict color palette only:
+dark forest green (#1E4D1E) for human silhouettes,
+medium green (#4A8C3F) for dog shapes,
+warm orange-gold (#F5A623) for movement arrows and direction lines,
+solid plain off-white background (#F2F7F2) uniformly filled,
+thin clean border frame around the entire image,
+border color dark forest green (#2E6B2E), border width 8px,
+no gradients in background, no vignette, no drop shadow,
+light warm grey (#C8C4B8) for position zones and ground markings,
+simple geometric human figures, tiny stylized dog shapes,
+bold clear arrows showing movement flow,
+clean infographic style, no gradients, no shadows, flat design,
+no text, no photorealism, no clutter
+--ar 3:2 --style raw --no gradients --v 6.1 --seed 1182697702
+
+── KURZREFERENZ ÜBUNGSSZENARIEN ──────────────────────────────────────────────
+
+Sitz/Platz    → human stationary, dog moves to position in front, stops
+Abruf         → human on one end, dog starts far away, straight arrow toward human
+Leinenführig  → human and dog move together, parallel arrow along a path
+Slalom        → dog weaves between human leg markers, curved zigzag arrow
+Bleib + Abstand → human steps away from sitting dog, dashed arrow showing distance
+Begegnung     → two humans with dogs approaching each other, arrows converging
+Freifolge     → human and dog move together in a curve or circle
