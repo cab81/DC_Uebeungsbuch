@@ -8,6 +8,11 @@ fertigen LaTeX-Code der direkt in die Kapitel-Datei eingefügt werden kann.
 
 import sys
 import os
+import io
+
+# Sicherstellen dass stdin/stdout UTF-8 verwenden (wichtig für Umlaute)
+sys.stdin  = io.TextIOWrapper(sys.stdin.buffer,  encoding="utf-8", errors="replace")
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
 
 # ── Farben ────────────────────────────────────────────────────────────────────
 class F:
@@ -294,15 +299,19 @@ def erstelle_uebung(typ):
     if bestaetigung == "j":
         try:
             # 1. Übungsdatei schreiben
+            inhalt = (
+                f"% Übung: {titel}\n"
+                f"% Altersgruppe: {altersgruppe} | Kategorie: {kategorie} | Schwierigkeit: {schwierigkeit}\n"
+                + latex
+            )
+            # Surrogates bereinigen bevor wir schreiben
+            inhalt = inhalt.encode("utf-8", errors="replace").decode("utf-8")
             with open(uebung_pfad, "w", encoding="utf-8") as f:
-                f.write(f"% Übung: {titel}\n")
-                f.write(f"% Altersgruppe: {altersgruppe} | Kategorie: {kategorie} | Schwierigkeit: {schwierigkeit}\n")
-                f.write(latex)
+                f.write(inhalt)
             print()
             print(F.DGRUEN + F.FETT + f"  ✓ Übungsdatei erstellt: {uebung_pfad}" + F.RESET)
 
             # 2. \input in Kapitel-Datei einfügen
-            # Prüfen ob der Input bereits vorhanden
             with open(kapitel_pfad, "r", encoding="utf-8") as f:
                 kapitel_inhalt = f.read()
 
@@ -320,6 +329,7 @@ def erstelle_uebung(typ):
                 else:
                     neuer_inhalt = kapitel_inhalt + f"\n{input_zeile}\n"
 
+                neuer_inhalt = neuer_inhalt.encode("utf-8", errors="replace").decode("utf-8")
                 with open(kapitel_pfad, "w", encoding="utf-8") as f:
                     f.write(neuer_inhalt)
                 print(F.DGRUEN + F.FETT + f"  ✓ Eingebettet in: {kapitel_pfad}" + F.RESET)
