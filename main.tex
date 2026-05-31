@@ -121,9 +121,9 @@
 
 % Altersgruppen-Label (Reintext, für Header-Raster)
 \newcommand{\alterslabel}[1]{%
-  \ifthenelse{\equal{#1}{welpen}}{\mbox{\faPaw~Welpen / Junghunde}}{}%
-  \ifthenelse{\equal{#1}{pubertaet}}{\mbox{\faPaw~Pubertät}}{}%
-  \ifthenelse{\equal{#1}{erwachsen}}{\mbox{\faPaw~Erwachsene Hunde}}{}%
+  \ifthenelse{\equal{#1}{welpen}}{\faPaw~Welpen/Junghunde}{}%
+  \ifthenelse{\equal{#1}{pubertaet}}{\faPaw~Pubertät}{}%
+  \ifthenelse{\equal{#1}{erwachsen}}{\faPaw~Erwachsene Hunde}{}%
 }
 
 % ─── Übungs-Umgebung (Doppelseite) ────────────────────────────────────────────
@@ -156,26 +156,28 @@
   % ── Linke Seite (gerade Seitenzahl) ──────────────────────────────────────
   \ifodd\value{page}\hbox{}\clearpage\fi
   % Seite 1: Titel + Metadaten + Bild + Beschreibung
-  % Header-Balken: Titelzeile + Metaraster
-  \noindent\colorbox{primary}{%
-    \parbox[t][1.0cm][c]{\textwidth}{%
-      \hspace{6pt}{\color{white}\huge\bfseries\UebTitel}%
+  % Header: Titelzeile + Metaraster – beide exakt \textwidth breit
+  {%
+    \setlength{\fboxsep}{0pt}%
+    \noindent\colorbox{primary}{%
+      \parbox[c][1.05cm][c]{\textwidth}{%
+        \hspace{8pt}{\color{white}\huge\bfseries\UebTitel}%
+      }%
     }%
+  }\\[-2pt]%
+  \noindent{%
+    \setlength{\tabcolsep}{6pt}%
+    \arrayrulecolor{white!30!primary}%
+    \begin{tabularx}{\textwidth}{%
+      >{\hsize=1.26\hsize\color{white}\footnotesize\bfseries\arraybackslash}X|
+      >{\hsize=1.14\hsize\centering\arraybackslash\color{white}\footnotesize}X|
+      >{\hsize=0.60\hsize\centering\arraybackslash\color{white}\footnotesize}X%
+    }
+      \cellcolor{primary!80!black}\rule{0pt}{0.60cm}\alterslabel{\UebAlter} &
+      \cellcolor{primary!80!black}\faTag~\UebKategorie &
+      \cellcolor{primary!80!black}\schwierigkeit{\UebSchwierigkeit}\\[3pt]
+    \end{tabularx}%
   }%
-  \\[-2pt]%
-  \noindent{\arrayrulecolor{white!40!primary}%
-  \setlength{\tabcolsep}{6pt}%
-  \colorbox{primary!80!black}{%
-    \begin{tabular}{@{\hspace{4pt}}
-        >{\centering\arraybackslash\color{white}\footnotesize\bfseries}m{\dimexpr0.42\textwidth-10pt\relax}|
-        >{\centering\arraybackslash\color{white}\footnotesize}m{\dimexpr0.38\textwidth-14pt\relax}|
-        >{\centering\arraybackslash\color{white}\footnotesize}m{\dimexpr0.20\textwidth-14pt\relax}
-      @{\hspace{4pt}}}
-      \rule{0pt}{0.55cm}\alterslabel{\UebAlter} &
-      \faTag~\UebKategorie &
-      \schwierigkeit{\UebSchwierigkeit}\\[2pt]
-    \end{tabular}%
-  }}%
 
   \vspace{8pt}
 
