@@ -10,6 +10,7 @@
 \usepackage{graphicx}
 \usepackage{xcolor}
 \usepackage{tikz}
+\usetikzlibrary{calc}
 \usepackage{tcolorbox}
 \usepackage{fontawesome5}
 \usepackage{enumitem}
@@ -19,6 +20,7 @@
 \usepackage{booktabs}
 \usepackage{array}
 \usepackage{tabularx}
+\usepackage{colortbl}
 \usepackage{mdframed}
 \usepackage{ifthen}
 \usepackage{multicol}
@@ -117,6 +119,13 @@
   }{}%
 }
 
+% Altersgruppen-Label (Reintext, für Header-Raster)
+\newcommand{\alterslabel}[1]{%
+  \ifthenelse{\equal{#1}{welpen}}{\mbox{\faPaw~Welpen / Junghunde}}{}%
+  \ifthenelse{\equal{#1}{pubertaet}}{\mbox{\faPaw~Pubertät}}{}%
+  \ifthenelse{\equal{#1}{erwachsen}}{\mbox{\faPaw~Erwachsene Hunde}}{}%
+}
+
 % ─── Übungs-Umgebung (Doppelseite) ────────────────────────────────────────────
 % Verwendung:
 %   \begin{uebung}{Titel}{altersgruppe}{kategorie}{schwierigkeit_1_bis_5}
@@ -147,31 +156,26 @@
   % ── Linke Seite (gerade Seitenzahl) ──────────────────────────────────────
   \ifodd\value{page}\hbox{}\clearpage\fi
   % Seite 1: Titel + Metadaten + Bild + Beschreibung
-  \noindent
-  % Header-Balken mit Titel und Metadaten in einem Block
-  \begin{tcolorbox}[
-    colback=primary,
-    colframe=primary,
-    arc=0pt,
-    boxrule=0pt,
-    left=6pt, right=6pt, top=6pt, bottom=6pt,
-    width=\textwidth,
-    sharp corners
-  ]
-    {\color{white}\huge\bfseries\UebTitel}\\[4pt]
-    \leavevmode\hbox to \linewidth{%
-      \altersbadge{\UebAlter}\hspace{5pt}%
-      \tcbox[colback=white!15!primary, colframe=white!30!primary,
-             fontupper=\small\color{white}, boxrule=0.6pt, arc=4pt,
-             boxsep=1pt, left=4pt, right=4pt, top=1pt, bottom=1pt]{%
-        \faTag~\UebKategorie}%
-      \hfill%
-      \tcbox[colback=white!15!primary, colframe=white!30!primary,
-             fontupper=\small\color{white}, boxrule=0.6pt, arc=4pt,
-             boxsep=1pt, left=4pt, right=4pt, top=1pt, bottom=1pt]{%
-        \schwierigkeit{\UebSchwierigkeit}}%
-    }
-  \end{tcolorbox}
+  % Header-Balken: Titelzeile + Metaraster
+  \noindent\colorbox{primary}{%
+    \parbox[t][1.0cm][c]{\textwidth}{%
+      \hspace{6pt}{\color{white}\huge\bfseries\UebTitel}%
+    }%
+  }%
+  \\[-2pt]%
+  \noindent{\arrayrulecolor{white!40!primary}%
+  \setlength{\tabcolsep}{6pt}%
+  \colorbox{primary!80!black}{%
+    \begin{tabular}{@{\hspace{4pt}}
+        >{\centering\arraybackslash\color{white}\footnotesize\bfseries}m{\dimexpr0.42\textwidth-10pt\relax}|
+        >{\centering\arraybackslash\color{white}\footnotesize}m{\dimexpr0.38\textwidth-14pt\relax}|
+        >{\centering\arraybackslash\color{white}\footnotesize}m{\dimexpr0.20\textwidth-14pt\relax}
+      @{\hspace{4pt}}}
+      \rule{0pt}{0.55cm}\alterslabel{\UebAlter} &
+      \faTag~\UebKategorie &
+      \schwierigkeit{\UebSchwierigkeit}\\[2pt]
+    \end{tabular}%
+  }}%
 
   \vspace{8pt}
 
