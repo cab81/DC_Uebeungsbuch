@@ -103,12 +103,25 @@ def baue_aufzaehlung(eintraege, fett_titel=True):
     zeilen.append("    \\end{itemize}")
     return "\n".join(zeilen)
 
-def ziel_datei(typ, altersgruppe):
-    basis = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    if typ == "einzeln":
-        return os.path.join(basis, "chapters", "heimuebungen", f"{altersgruppe}.tex")
-    else:
-        return os.path.join(basis, "chapters", "gruppenuebungen", f"{altersgruppe}.tex")
+def basis_pfad():
+    return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+def kapitel_datei(typ, altersgruppe):
+    """Gibt den Pfad zur Kapitel-Datei zurück."""
+    teil = "heimuebungen" if typ == "einzeln" else "gruppenuebungen"
+    return os.path.join(basis_pfad(), "chapters", teil, f"{altersgruppe}.tex")
+
+def uebungs_datei(typ, altersgruppe, dateiname):
+    """Gibt den Pfad zur neuen Übungs-Datei zurück."""
+    teil = "heimuebungen" if typ == "einzeln" else "gruppenuebungen"
+    ordner = os.path.join(basis_pfad(), "chapters", teil, altersgruppe)
+    os.makedirs(ordner, exist_ok=True)
+    return os.path.join(ordner, f"{dateiname}.tex")
+
+def input_pfad(typ, altersgruppe, dateiname):
+    """Gibt den relativen input-Pfad für LaTeX zurück."""
+    teil = "heimuebungen" if typ == "einzeln" else "gruppenuebungen"
+    return f"chapters/{teil}/{altersgruppe}/{dateiname}"
 
 def bild_pfad(typ, altersgruppe, dateiname):
     if not dateiname:
@@ -247,30 +260,73 @@ def erstelle_uebung(typ):
 \\end{{uebung}}
 """
 
-    # ── Ausgabe ───────────────────────────────────────────────────────────────
+    # ── Dateiname für die Übungsdatei ─────────────────────────────────────────
+    linie()
+    print(F.FETT + F.WEISS + "  SCHRITT 6 — Dateiname" + F.RESET)
+    teil = "heimuebungen" if typ == "einzeln" else "gruppenuebungen"
+    print(F.GRAU + f"\n  Datei wird gespeichert in: chapters/{teil}/{altersgruppe}/" + F.RESET)
+    print(F.GRAU + "  Nur Dateiname ohne .tex eingeben (Leerzeichen werden zu Unterstrichen)." + F.RESET)
+    dateiname_roh = frage("Dateiname",
+                          [titel.lower().replace(" ", "_"),
+                           "sitz", "abruf_im_freien", "hundebegegnung"])
+    dateiname = dateiname_roh.lower().replace(" ", "_")
+
+    # ── Vorschau ──────────────────────────────────────────────────────────────
     print()
     dlinie()
-    print(F.DGRUEN + F.FETT + "  FERTIGER LATEX-CODE" + F.RESET)
+    print(F.DGRUEN + F.FETT + "  VORSCHAU LATEX-CODE" + F.RESET)
     dlinie()
     print(F.WEISS + latex + F.RESET)
     dlinie()
 
-    # ── In Datei speichern ────────────────────────────────────────────────────
-    print()
-    ziel = ziel_datei(typ, altersgruppe)
-    print(F.GRUEN + f"  Zieldatei: {ziel}" + F.RESET)
-    print()
-    speichern = input(F.GELB + "  In Kapitel-Datei einfügen? (j/n): " + F.RESET).strip().lower()
+    # ── Speichern ─────────────────────────────────────────────────────────────
+    uebung_pfad  = uebungs_datei(typ, altersgruppe, dateiname)
+    kapitel_pfad = kapitel_datei(typ, altersgruppe)
+    rel_input    = input_pfad(typ, altersgruppe, dateiname)
 
-    if speichern == "j":
+    print()
+    print(F.GRUEN + f"  Neue Übungsdatei:  {uebung_pfad}" + F.RESET)
+    print(F.GRUEN + f"  Eingebettet in:    {kapitel_pfad}" + F.RESET)
+    print(F.GRUEN + f"  \\input-Pfad:       {rel_input}" + F.RESET)
+    print()
+    bestaetigung = input(F.GELB + "  Datei erstellen und einbetten? (j/n): " + F.RESET).strip().lower()
+
+    if bestaetigung == "j":
         try:
-            with open(ziel, "a", encoding="utf-8") as f:
+            # 1. Übungsdatei schreiben
+            with open(uebung_pfad, "w", encoding="utf-8") as f:
+                f.write(f"% Übung: {titel}\n")
+                f.write(f"% Altersgruppe: {altersgruppe} | Kategorie: {kategorie} | Schwierigkeit: {schwierigkeit}\n")
                 f.write(latex)
             print()
-            print(F.DGRUEN + F.FETT + f"  ✓ Erfolgreich eingefügt in: {ziel}" + F.RESET)
+            print(F.DGRUEN + F.FETT + f"  ✓ Übungsdatei erstellt: {uebung_pfad}" + F.RESET)
+
+            # 2. \input in Kapitel-Datei einfügen
+            # Prüfen ob der Input bereits vorhanden
+            with open(kapitel_pfad, "r", encoding="utf-8") as f:
+                kapitel_inhalt = f.read()
+
+            input_zeile = f"\\input{{{rel_input}}}"
+            if input_zeile in kapitel_inhalt:
+                print(F.GELB + f"  ⚠ \\input bereits vorhanden, wird nicht doppelt eingefügt." + F.RESET)
+            else:
+                # Vor dem Kommentar "% ── Weitere Übungen" einfügen, sonst ans Ende
+                marker = "% ── Weitere Übungen hier einfügen ─"
+                if marker in kapitel_inhalt:
+                    neuer_inhalt = kapitel_inhalt.replace(
+                        marker,
+                        f"{input_zeile}\n\n{marker}"
+                    )
+                else:
+                    neuer_inhalt = kapitel_inhalt + f"\n{input_zeile}\n"
+
+                with open(kapitel_pfad, "w", encoding="utf-8") as f:
+                    f.write(neuer_inhalt)
+                print(F.DGRUEN + F.FETT + f"  ✓ Eingebettet in: {kapitel_pfad}" + F.RESET)
+
         except Exception as e:
-            print(F.ROT + f"  Fehler beim Speichern: {e}" + F.RESET)
-            print(F.GELB + "  Bitte den LaTeX-Code manuell kopieren." + F.RESET)
+            print(F.ROT + f"  Fehler: {e}" + F.RESET)
+            print(F.GELB + "  Bitte den LaTeX-Code manuell speichern." + F.RESET)
     else:
         print(F.GRAU + "  Nicht gespeichert. LaTeX-Code oben manuell kopieren." + F.RESET)
 
