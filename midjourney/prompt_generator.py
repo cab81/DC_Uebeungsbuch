@@ -102,7 +102,7 @@ KERN_SEITENANSICHT = """\
 A female dog trainer standing upright seen from the side,
 {handzeichen},
 {hundeposition},
-{rasse_alter}, {farbe_fell},
+{rasse_alter},
 side view full body shot, calm and focused atmosphere,
 clean simple comic illustration style, bold outlines,
 flat colors with minimal shading, no photorealism,
@@ -192,18 +192,11 @@ def prompt_seitenansicht():
          "dog standing still beside the trainer, looking forward"]
     )
 
-    rasse_alter = frage(
-        "HUND — RASSE & ALTER",
-        ["medium to large adult dog, fluffy dense double coat",
-         "small puppy, fluffy round face, floppy ears",
-         "large senior dog, broad chest, calm posture"]
-    )
-
-    farbe_fell = frage(
-        "HUND — FARBE & FELL",
-        ["tiger brindle coat pattern, dark brown and black striped fur with tan markings",
-         "golden yellow fur, short smooth coat",
-         "black and white patches, medium length wavy coat"]
+    hund = frage(
+        "HUND — RASSE, ALTER, FARBE & FELL",
+        ["medium to large adult dog, fluffy dense double coat, tiger brindle coat pattern, dark brown and black striped fur with tan markings",
+         "small puppy, floppy ears, golden yellow fur, short smooth coat",
+         "large senior dog, broad chest, black and white patches, medium length wavy coat"]
     )
 
     sref = frage_stilreferenz()
@@ -211,8 +204,7 @@ def prompt_seitenansicht():
     prompt = KERN_SEITENANSICHT.format(
         handzeichen=handzeichen,
         hundeposition=hundeposition,
-        rasse_alter=rasse_alter,
-        farbe_fell=farbe_fell,
+        rasse_alter=hund,
     ) + sref
     ausgabe(prompt)
 
