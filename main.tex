@@ -42,6 +42,23 @@
 \definecolor{erwachsencolor}{HTML}{1E5C1E} % Dunkles Grün (Erwachsen)
 
 % ─── Schriften / Überschriften ────────────────────────────────────────────────
+\titleformat{\part}[display]
+  {\normalfont\centering}
+  {}
+  {0pt}
+  {%
+    \begin{tcolorbox}[
+      colback=primary, colframe=primary,
+      arc=6pt, boxrule=0pt,
+      left=12pt, right=12pt, top=14pt, bottom=14pt,
+      halign=center
+    ]
+      \color{white}\fontsize{11}{14}\selectfont\bfseries\MakeUppercase{\partname}~\thepart\\[6pt]
+      \fontsize{22}{26}\selectfont
+    \end{tcolorbox}%
+  }
+\titlespacing*{\part}{0pt}{0pt}{40pt}
+
 \titleformat{\chapter}[display]
   {\normalfont\huge\bfseries\color{primary}}
   {\chaptertitlename\ \thechapter}{12pt}{\Huge}
@@ -250,8 +267,18 @@
 \mainmatter
 
 % ══════════════════════════════════════════════════════════════════════════════
+\part{Heimübungen}
+\label{part:heim}
+
+% ── Beschreibungsseite für den Teil ───────────────────────────────────────────
+\begin{tcolorbox}[colback=infobg, colframe=primary, arc=6pt, boxrule=0.8pt]
+  \faHome~\textbf{Diese Übungen} können Hundehalter selbstständig zu Hause durchführen.
+  Sie erfordern keine weiteren Menschen oder Hunde und lassen sich gut in den Alltag integrieren.
+\end{tcolorbox}
+
+% ══════════════════════════════════════════════════════════════════════════════
 \chapter{Welpen \& Junghunde}
-\label{chap:welpen}
+\label{chap:heim:welpen}
 
 \section{Grundübungen}
 
@@ -285,7 +312,7 @@
 
 % ══════════════════════════════════════════════════════════════════════════════
 \chapter{Pubertät}
-\label{chap:pubertaet}
+\label{chap:heim:pubertaet}
 
 \section{Auffrischung \& Impulskontrolle}
 
@@ -319,7 +346,7 @@
 
 % ══════════════════════════════════════════════════════════════════════════════
 \chapter{Erwachsene Hunde}
-\label{chap:erwachsen}
+\label{chap:heim:erwachsen}
 
 \section{Verfeinerung \& Alltagsübungen}
 
@@ -350,6 +377,67 @@
     \end{itemize}
   }
 \end{uebung}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\part{Gruppenübungen}
+\label{part:gruppe}
+
+% ── Beschreibungsseite für den Teil ───────────────────────────────────────────
+\begin{tcolorbox}[colback=infobg, colframe=primary, arc=6pt, boxrule=0.8pt]
+  \faUsers~\textbf{Diese Übungen} sind speziell für das Training in der Gruppe konzipiert.
+  Sie erfordern andere Hunde, andere Menschen oder eine strukturierte Gruppenatmosphäre
+  und sind daher im Hundeschulkurs am wirkungsvollsten.
+\end{tcolorbox}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\chapter{Welpen \& Junghunde}
+\label{chap:gruppe:welpen}
+
+\section{Sozialisation \& Spiel}
+
+% ── Platzhalter – hier Gruppenübungen für Welpen einfügen ─────────────────────
+\begin{uebung}{Hundebegegnung}{welpen}{Begrüßung}{2}
+  \uebungsbeschreibung{%
+    Zwei Welpen werden kontrolliert aneinander herangeführt. Ziel ist eine ruhige,
+    entspannte Begrüßung ohne Überwältigung.\\[6pt]
+    \textbf{Schritte:}
+    \begin{enumerate}[leftmargin=*, itemsep=2pt]
+      \item Beide Hunde an lockerer Leine, Abstand ca. 5\,m.
+      \item Beide Halter gehen parallel – kein direktes Aufeinanderzugehen.
+      \item Abstand schrittweise verkürzen, wenn beide Hunde entspannt sind.
+      \item Kurze Begrüßung erlauben (max. 3 Sek.), dann trennen und loben.
+    \end{enumerate}
+  }
+  \uebungsvariationen{%
+    \begin{itemize}[leftmargin=*, itemsep=4pt]
+      \item \textbf{Mehrere Hunde:} Übung in der Gruppe mit wechselnden Partnerhunden.
+      \item \textbf{Mit Ablenkung:} Begegnung in belebter Umgebung üben.
+    \end{itemize}
+  }
+  \uebungstrainer{%
+    \begin{itemize}[leftmargin=*, itemsep=4pt]
+      \item Körpersprache beider Hunde genau beobachten – bei Anzeichen von Stress sofort Abstand vergrößern.
+      \item Halter anweisen, die Leine locker zu halten – Spannung überträgt sich auf den Hund.
+      \item Überwältigende Begrüßungen (Aufspringen, Verfolgen) sofort unterbrechen.
+    \end{itemize}
+  }
+\end{uebung}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\chapter{Pubertät}
+\label{chap:gruppe:pubertaet}
+
+\section{Impulskontrolle in der Gruppe}
+
+% ── Platzhalter – hier Gruppenübungen für Pubertät einfügen ──────────────────
+
+% ══════════════════════════════════════════════════════════════════════════════
+\chapter{Erwachsene Hunde}
+\label{chap:gruppe:erwachsen}
+
+\section{Zusammenarbeit \& Distanzkontrolle}
+
+% ── Platzhalter – hier Gruppenübungen für Erwachsene einfügen ────────────────
 
 % ─── Anhang (optional) ────────────────────────────────────────────────────────
 \backmatter
