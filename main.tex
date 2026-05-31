@@ -147,7 +147,7 @@
   \ifodd\value{page}\hbox{}\clearpage\fi
   % Seite 1: Titel + Metadaten + Bild + Beschreibung
   \noindent
-  % Header-Balken
+  % Header-Balken mit Titel und Metadaten in einem Block
   \begin{tcolorbox}[
     colback=primary,
     colframe=primary,
@@ -157,22 +157,19 @@
     width=\textwidth,
     sharp corners
   ]
-    {\color{white}\huge\bfseries\UebTitel}
+    {\color{white}\huge\bfseries\UebTitel}\\[4pt]
+    \altersbadge{\UebAlter}\;
+    \tcbox[colback=white!15!primary, colframe=white!30!primary,
+           fontupper=\small\color{white}, boxrule=0.6pt, arc=4pt,
+           boxsep=1pt, left=4pt, right=4pt, top=1pt, bottom=1pt]{%
+      \faTag~\UebKategorie}\hfill
+    \tcbox[colback=white!15!primary, colframe=white!30!primary,
+           fontupper=\small\color{white}, boxrule=0.6pt, arc=4pt,
+           boxsep=1pt, left=4pt, right=4pt, top=1pt, bottom=1pt]{%
+      Schwierigkeit:~\schwierigkeit{\UebSchwierigkeit}}
   \end{tcolorbox}
 
-  \vspace{4pt}
-  % Badges: Altersgruppe | Kategorie | Schwierigkeit
-  \noindent
-  \altersbadge{\UebAlter}\quad
-  \tcbox[colback=lightbg, colframe=primary!40, fontupper=\small, boxrule=0.8pt, arc=4pt,
-         boxsep=2pt, left=4pt, right=4pt, top=1pt, bottom=1pt]{%
-    \faTag~\UebKategorie}%
-  \hfill
-  \tcbox[colback=lightbg, colframe=primary!40, fontupper=\small, boxrule=0.8pt, arc=4pt,
-         boxsep=2pt, left=4pt, right=4pt, top=1pt, bottom=1pt]{%
-    Schwierigkeit: \schwierigkeit{\UebSchwierigkeit}}
-
-  \vspace{10pt}
+  \vspace{8pt}
 
   % Bild
   \ifthenelse{\equal{\UebBild}{}}{%
