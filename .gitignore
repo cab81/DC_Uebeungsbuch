@@ -24,3 +24,4 @@
 
 # Editor-Metadaten
 .DS_Store
+**/__pycache__
