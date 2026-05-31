@@ -142,13 +142,13 @@ no text, no photorealism, no clutter
 --ar 3:2 --style raw --no gradients --v 6.1 --seed 1182697702"""
 
 # ── KURZREFERENZEN ───────────────────────────────────────────────────────────
-HANDZEICHEN_REF = [
-    ("Sitz",       "right arm raised, index finger pointing straight up as hand signal"),
-    ("Platz",      "right arm extended downward, index finger pointing to the ground"),
-    ("Bleib",      "open right hand, palm facing toward the dog as stop signal"),
-    ("Hier/Abruf", "both arms open wide, welcoming gesture toward the body"),
-    ("Fuß",        "left hand pointing down along the left leg"),
-    ("Aus",        "open hand, palm facing down, pushing gesture downward"),
+TRAINERPOSITION_REF = [
+    ("Sitz",       "right arm raised, index finger pointing straight up as hand signal, standing upright facing the dog"),
+    ("Platz",      "right arm extended downward, index finger pointing to the ground, leaning slightly forward"),
+    ("Bleib",      "open right hand, palm facing toward the dog as stop signal, stepping back one pace"),
+    ("Hier/Abruf", "both arms open wide, welcoming gesture, crouching slightly toward the dog"),
+    ("Fuß",        "left hand pointing down along the left leg, walking forward"),
+    ("Aus",        "open hand, palm facing down, pushing gesture downward, standing still"),
 ]
 
 UEBUNG_REF = [
@@ -177,12 +177,13 @@ def prompt_seitenansicht():
   Drücke ENTER um deine Eingabe zu bestätigen.
 """ + Farbe.RESET)
 
-    zeige_referenz(HANDZEICHEN_REF, "Kurzreferenz Handzeichen")
+    zeige_referenz(TRAINERPOSITION_REF, "Kurzreferenz Trainerposition & Verhalten")
 
     handzeichen = frage(
-        "HANDZEICHEN",
-        ["right arm raised, index finger pointing straight up as hand signal",
-         "open right hand, palm facing toward the dog as stop signal"]
+        "TRAINERPOSITION & VERHALTEN",
+        ["right arm raised, index finger pointing straight up as hand signal, standing upright facing the dog",
+         "open right hand, palm facing toward the dog as stop signal, stepping back one pace",
+         "both arms open wide, welcoming gesture, crouching slightly toward the dog"]
     )
 
     hundeposition = frage(

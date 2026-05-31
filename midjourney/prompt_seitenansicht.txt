@@ -6,12 +6,12 @@
 SCHRITT 1 — Platzhalter ausfüllen
 ──────────────────────────────────────────────────────────────────────────────
 
-[HANDZEICHEN]
-Beschreibe das verwendete Handzeichen der Trainerin
+[TRAINERPOSITION & VERHALTEN]
+Beschreibe Position, Haltung und Handzeichen der Trainerin
 Beispiele:
-  - right arm raised, index finger pointing straight up as hand signal
-  - open right hand, palm facing toward the dog as stop signal
-  - right arm extended downward, index finger pointing to the ground
+  - right arm raised, index finger pointing straight up as hand signal, standing upright facing the dog
+  - open right hand, palm facing toward the dog as stop signal, stepping back one pace
+  - right arm extended downward, index finger pointing to the ground, leaning slightly forward
 
 [HUNDEPOSITION & VERHALTEN]
 Beschreibe Position und Verhalten des Hundes
@@ -89,11 +89,11 @@ no speech bubbles, no text, no watermark
 --ar 3:2 --style raw --v 6.1 --seed 1182697702
 
 
-KURZREFERENZ HANDZEICHEN
+KURZREFERENZ TRAINERPOSITION & VERHALTEN
 ──────────────────────────────────────────────────────────────────────────────
-Sitz       → right arm raised, index finger pointing straight up
-Platz      → right arm extended downward, index finger pointing to the ground
-Bleib      → open right hand, palm facing toward the dog as stop signal
-Hier/Abruf → both arms open wide, welcoming gesture toward the body
-Fuß        → left hand pointing down along the left leg
-Aus        → open hand, palm facing down, pushing gesture downward
+Sitz       → right arm raised, index finger pointing straight up as hand signal, standing upright facing the dog
+Platz      → right arm extended downward, index finger pointing to the ground, leaning slightly forward
+Bleib      → open right hand, palm facing toward the dog as stop signal, stepping back one pace
+Hier/Abruf → both arms open wide, welcoming gesture, crouching slightly toward the dog
+Fuß        → left hand pointing down along the left leg, walking forward
+Aus        → open hand, palm facing down, pushing gesture downward, standing still
