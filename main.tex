@@ -18,6 +18,7 @@
 \usepackage{parskip}
 \usepackage{booktabs}
 \usepackage{array}
+\usepackage{tabularx}
 \usepackage{mdframed}
 \usepackage{ifthen}
 \usepackage{multicol}
@@ -157,17 +158,18 @@
     width=\textwidth,
     sharp corners
   ]
-    {\color{white}\huge\bfseries\UebTitel}\\[6pt]
-    \noindent\makebox[\textwidth][l]{%
-      \altersbadge{\UebAlter}\hspace{6pt}%
+    {\color{white}\huge\bfseries\UebTitel}\\[4pt]
+    \leavevmode\hbox to \linewidth{%
+      \altersbadge{\UebAlter}\hspace{5pt}%
       \tcbox[colback=white!15!primary, colframe=white!30!primary,
              fontupper=\small\color{white}, boxrule=0.6pt, arc=4pt,
              boxsep=1pt, left=4pt, right=4pt, top=1pt, bottom=1pt]{%
-        \faTag~\UebKategorie}\hfill%
+        \faTag~\UebKategorie}%
+      \hfill%
       \tcbox[colback=white!15!primary, colframe=white!30!primary,
              fontupper=\small\color{white}, boxrule=0.6pt, arc=4pt,
              boxsep=1pt, left=4pt, right=4pt, top=1pt, bottom=1pt]{%
-        Schwierigkeit:~\schwierigkeit{\UebSchwierigkeit}}%
+        \schwierigkeit{\UebSchwierigkeit}}%
     }
   \end{tcolorbox}
 
