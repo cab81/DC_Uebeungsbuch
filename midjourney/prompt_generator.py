@@ -47,6 +47,40 @@ def frage(bezeichnung, beispiele, pflicht=True):
             return ""
         print(Farbe.GELB + "  Bitte einen Wert eingeben." + Farbe.RESET)
 
+def frage_stilreferenz():
+    """Fragt optional nach einer Style Reference URL und Style Weight."""
+    print()
+    trennlinie()
+    print(Farbe.FETT + Farbe.CYAN + "  [STYLE REFERENCE — optional]" + Farbe.RESET)
+    print(Farbe.GRAU + "    Möchtest du ein Referenzbild verwenden um den Stil zu übernehmen?" + Farbe.RESET)
+    print(Farbe.GRAU + "    Bild-URL aus Discord/Imgur einfügen, oder ENTER zum Überspringen." + Farbe.RESET)
+    print()
+
+    url = input(Farbe.GELB + "  URL (oder ENTER überspringen): " + Farbe.RESET).strip()
+
+    if not url:
+        return ""
+
+    print()
+    print(Farbe.FETT + Farbe.CYAN + "  [STYLE WEIGHT --sw]" + Farbe.RESET)
+    print(Farbe.GRAU + "    Wie stark soll das Referenzbild den Stil beeinflussen?" + Farbe.RESET)
+    print(Farbe.GRAU + "     50  = leichte Anlehnung" + Farbe.RESET)
+    print(Farbe.GRAU + "    100  = Standard" + Farbe.RESET)
+    print(Farbe.GRAU + "    300  = empfohlen für einheitliche Bildserie  ←" + Farbe.RESET)
+    print(Farbe.GRAU + "    500  = Stil dominiert stark" + Farbe.RESET)
+    print(Farbe.GRAU + "   1000  = Maximum" + Farbe.RESET)
+    print()
+
+    while True:
+        sw = input(Farbe.GELB + "  Style Weight (Standard: 300): " + Farbe.RESET).strip()
+        if sw == "":
+            sw = "300"
+        if sw.isdigit() and 1 <= int(sw) <= 1000:
+            break
+        print(Farbe.GELB + "  Bitte eine Zahl zwischen 1 und 1000 eingeben." + Farbe.RESET)
+
+    return f" --sref {url} --sw {sw}"
+
 def ausgabe(prompt):
     """Gibt den fertigen Prompt als Kopiervorlage aus."""
     print()
@@ -172,12 +206,14 @@ def prompt_seitenansicht():
          "black and white patches, medium length wavy coat"]
     )
 
+    sref = frage_stilreferenz()
+
     prompt = KERN_SEITENANSICHT.format(
         handzeichen=handzeichen,
         hundeposition=hundeposition,
         rasse_alter=rasse_alter,
         farbe_fell=farbe_fell,
-    )
+    ) + sref
     ausgabe(prompt)
 
 # ── PROMPT 2: Draufsicht ──────────────────────────────────────────────────────
@@ -212,11 +248,13 @@ def prompt_draufsicht():
          "two arrows: one showing dog moving away, one showing dog returning"]
     )
 
+    sref = frage_stilreferenz()
+
     prompt = KERN_DRAUFSICHT.format(
         anzahl=anzahl,
         positionen=positionen,
         pfeile=pfeile,
-    )
+    ) + sref
     ausgabe(prompt)
 
 # ── HAUPTMENÜ ─────────────────────────────────────────────────────────────────
