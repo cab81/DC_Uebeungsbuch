@@ -22,6 +22,24 @@
 \usepackage{ifthen}
 \usepackage{multicol}
 \usepackage[hidelinks]{hyperref}
+% Manuelles Teil-Inhaltsverzeichnis
+\newcommand{\teilinhalt}[3]{%
+  % #1 = Icon, #2 = Beschreibung, #3 = Kapiteleinträge (itemize-Inhalt)
+  \begin{tcolorbox}[
+    title={\faListUl~Inhalt dieses Teils},
+    colback=lightbg,
+    colframe=primary,
+    fonttitle=\bfseries\color{white},
+    coltitle=white,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={colback=primary, arc=3pt},
+    arc=4pt, boxrule=0.8pt
+  ]
+    \begin{itemize}[leftmargin=1.5em, itemsep=4pt, topsep=2pt]
+      #3
+    \end{itemize}
+  \end{tcolorbox}
+}
 
 \tcbuselibrary{skins, breakable, most}
 
@@ -341,6 +359,13 @@ wachsen und sich mit unserem Team weiterentwickeln.
 \part{Heimübungen}
 \label{part:heim}
 
+\teilinhalt{\faHome}{}{%
+  \item[\faPaw] \textbf{Welpen \& Junghunde} \dotfill Kapitel~\ref{chap:heim:welpen}
+  \item[\faPaw] \textbf{Pubertät} \dotfill Kapitel~\ref{chap:heim:pubertaet}
+  \item[\faPaw] \textbf{Erwachsene Hunde} \dotfill Kapitel~\ref{chap:heim:erwachsen}
+}
+
+\bigskip
 % ── Beschreibungsseite für den Teil ───────────────────────────────────────────
 \begin{tcolorbox}[colback=infobg, colframe=primary, arc=6pt, boxrule=0.8pt]
   \faHome~\textbf{Diese Übungen} können Hundehalter selbstständig zu Hause durchführen.
@@ -453,6 +478,13 @@ wachsen und sich mit unserem Team weiterentwickeln.
 \part{Gruppenübungen}
 \label{part:gruppe}
 
+\teilinhalt{\faUsers}{}{%
+  \item[\faPaw] \textbf{Welpen \& Junghunde} \dotfill Kapitel~\ref{chap:gruppe:welpen}
+  \item[\faPaw] \textbf{Pubertät} \dotfill Kapitel~\ref{chap:gruppe:pubertaet}
+  \item[\faPaw] \textbf{Erwachsene Hunde} \dotfill Kapitel~\ref{chap:gruppe:erwachsen}
+}
+
+\bigskip
 % ── Beschreibungsseite für den Teil ───────────────────────────────────────────
 \begin{tcolorbox}[colback=infobg, colframe=primary, arc=6pt, boxrule=0.8pt]
   \faUsers~\textbf{Diese Übungen} sind speziell für das Training in der Gruppe konzipiert.
